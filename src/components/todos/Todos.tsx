@@ -28,18 +28,8 @@ export function Todos() {
   }
 
   return (
-    <div>
-      <h2
-        className={`
-          w-96
-          text-2xl
-          underline
-          mb-2.5
-          text-center
-        `}
-      >
-        Todos App
-      </h2>
+    <div className={`w-72 md:w-96`}>
+      <h2 className={`text-2xl underline mb-2.5 text-center`}>Todos App</h2>
       <TodoForm onNewTodo={addTodo} />
       <hr className={`my-6`} />
       <div>

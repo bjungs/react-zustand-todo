@@ -1,4 +1,6 @@
-import { ChangeEvent, SyntheticEvent, useState } from 'react'
+import React, { ForwardedRef, Ref } from 'react'
+
+import { ChangeEvent, SyntheticEvent, useRef, useState } from 'react'
 import { createTodo, Todo } from './'
 
 type TodoFormProps = {
@@ -12,7 +14,10 @@ type TodoFormFieldProps = {
   onChange: (newValue: any) => void
 }
 
-function TodoFormField({ label, type, value, onChange }: TodoFormFieldProps) {
+const TodoFormField = React.forwardRef(function (
+  { label, type, value, onChange }: TodoFormFieldProps,
+  ref: ForwardedRef<HTMLInputElement>
+) {
   const updateValue = (e: ChangeEvent<HTMLInputElement>) => {
     onChange(e.target.value)
   }
@@ -23,6 +28,7 @@ function TodoFormField({ label, type, value, onChange }: TodoFormFieldProps) {
         {label}
       </label>
       <input
+        ref={ref}
         className={`
           bg-gray-50
           border border-gray-300
@@ -40,10 +46,11 @@ function TodoFormField({ label, type, value, onChange }: TodoFormFieldProps) {
       />
     </div>
   )
-}
+})
 
 export function TodoForm({ onNewTodo }: TodoFormProps) {
   const [title, setTitle] = useState<string>('')
+  const inputRef = useRef<HTMLInputElement>(null)
 
   function addTodo(e: SyntheticEvent) {
     e.preventDefault()
@@ -53,18 +60,23 @@ export function TodoForm({ onNewTodo }: TodoFormProps) {
     }
   }
 
+  function focusOnInput() {
+    inputRef.current?.focus()
+  }
+
   return (
     <form onSubmit={addTodo} className={`flex flex-col`}>
       <fieldset>
         <legend>Create a new TODO</legend>
         <TodoFormField
+          ref={inputRef}
           type='text'
           label='Title'
           value={title}
           onChange={setTitle}
         />
       </fieldset>
-      <button
+      <button // submit
         className={`
           text-white
           bg-blue-700 hover:bg-blue-800 disabled:bg-gray-400
@@ -74,6 +86,7 @@ export function TodoForm({ onNewTodo }: TodoFormProps) {
           px-5 py-2.5
           self-end
         `}
+        onClick={focusOnInput}
         disabled={!title}
         type='submit'
       >
