@@ -47,7 +47,7 @@ export function Todo({
         ${completed ? 'bg-green-100' : ''}
       `}
     >
-      <div
+      <div // content
         className={`
           flex
           flex-col
@@ -67,14 +67,15 @@ export function Todo({
         </h3>
         <div className={`text-xs`}>{dateTimeString}</div>
       </div>
-      <div
+      <div // inputs
         className={`
           flex
           flex-col
           items-center
+          ml-1
         `}
       >
-        <input
+        <input // 'complete' checkbox
           className={`
             w-4
             h-4
@@ -84,10 +85,10 @@ export function Todo({
           checked={completed}
           onClick={updateStatus}
         />
-        <FiTrash
+        <FiTrash // 'delete' btn
           className={`
             w-4 h-4
-            mt-1
+            mt-2
             cursor-pointer
           `}
           size='16'
