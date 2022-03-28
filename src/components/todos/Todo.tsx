@@ -40,7 +40,7 @@ export function Todo({
     <div
       className={`
         flex
-        mb-6
+        mb-3
         border-2
         px-2 py-2
         ${completed ? 'bg-blue-100' : ''}

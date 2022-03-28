@@ -7,47 +7,6 @@ type TodoFormProps = {
   onNewTodo: (newTodo: Todo) => void
 }
 
-type TodoFormFieldProps = {
-  label: string
-  type: string
-  value: any
-  onChange: (newValue: any) => void
-}
-
-const TodoFormField = React.forwardRef(function (
-  { label, type, value, onChange }: TodoFormFieldProps,
-  ref: ForwardedRef<HTMLInputElement>
-) {
-  const updateValue = (e: ChangeEvent<HTMLInputElement>) => {
-    onChange(e.target.value)
-  }
-
-  return (
-    <div className={`mb-6`}>
-      <label className={`text-sm font-medium block mb-2`} htmlFor={label}>
-        {label}
-      </label>
-      <input
-        ref={ref}
-        className={`
-          bg-gray-50
-          border border-gray-300
-          sm:text-sm
-          rounded-lg
-          focus:ring-blue-500 focus:border-blue-500
-          block
-          p-2.5
-          w-full
-        `}
-        type={type}
-        name={label}
-        value={value}
-        onChange={updateValue}
-      />
-    </div>
-  )
-})
-
 export function TodoForm({ onNewTodo }: TodoFormProps) {
   const [title, setTitle] = useState<string>('')
   const inputRef = useRef<HTMLInputElement>(null)
@@ -64,17 +23,35 @@ export function TodoForm({ onNewTodo }: TodoFormProps) {
     inputRef.current?.focus()
   }
 
+  function setTitleFromInput(e: ChangeEvent<HTMLInputElement>) {
+    setTitle(e.target.value)
+  }
+
   return (
     <form onSubmit={addTodo} className={`flex flex-col`}>
       <fieldset>
         <legend>Create a new TODO</legend>
-        <TodoFormField
-          ref={inputRef}
-          type='text'
-          label='Title'
-          value={title}
-          onChange={setTitle}
-        />
+        <div className={`mb-6`}>
+          <label className={`text-sm font-medium block mb-2`} htmlFor={'title'}>
+            Title
+          </label>
+          <input
+            className={`
+          bg-gray-50
+          border border-gray-300
+          sm:text-sm
+          rounded-lg
+          focus:ring-blue-500 focus:border-blue-500
+          block
+          p-2.5
+          w-full
+        `}
+            type={'text'}
+            name={'title'}
+            value={title}
+            onChange={setTitleFromInput}
+          />
+        </div>
       </fieldset>
       <button // submit
         className={`
