@@ -84,6 +84,7 @@ export function Todo({
           type='checkbox'
           checked={completed}
           onClick={updateStatus}
+          readOnly
         />
         <FiTrash // 'delete' btn
           className={`
