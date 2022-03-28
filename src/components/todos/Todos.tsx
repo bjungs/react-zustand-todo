@@ -3,17 +3,7 @@ import { createTodo, Todo } from './Todo'
 import { TodoForm } from './TodoForm'
 
 export function Todos() {
-  const [todos, setTodos] = useState<Todo[]>([
-    createTodo(
-      'Add layout style',
-      'create a proper layout for displaying todos'
-    ),
-    createTodo(
-      'Style TODO component',
-      'create a proper layout for displaying todos'
-    ),
-    createTodo('Add form', 'create a form to generate new TODOs automatically'),
-  ])
+  const [todos, setTodos] = useState<Todo[]>([])
 
   const updateTodoStatus = (idx: number) => (completed: boolean) => {
     // todo: use zustand to handle the state

@@ -2,9 +2,8 @@ import { FiTrash } from 'react-icons/fi'
 
 export type Todo = {
   title: string
-  description: string
-  createdAt: Date
   completed: boolean
+  createdAt: Date
 }
 
 type TodoProps = Todo & {
@@ -12,28 +11,30 @@ type TodoProps = Todo & {
   onRemoveClick: () => void
 }
 
-export function createTodo(title: string, description: string): Todo {
+export function createTodo(title: string, completed: boolean = false): Todo {
   return {
     title,
-    description,
+    completed,
     createdAt: new Date(),
-    completed: false,
   }
+}
+
+function formatDateTime(dateTime: Date): string {
+  const dateTimeString = dateTime.toISOString().split('T')
+  const date = dateTimeString[0]
+  const time = dateTimeString[1].split('.')[0]
+  return `created on ${date} at ${time}`
 }
 
 export function Todo({
   title,
-  description,
   createdAt,
   completed = false,
   onStatusChange,
   onRemoveClick,
 }: TodoProps) {
   const updateStatus = () => onStatusChange(!completed)
-
-  const dateTime = createdAt.toISOString().split('T')
-  const date = dateTime[0]
-  const time = dateTime[1].split('.')[0]
+  const dateTimeString = formatDateTime(createdAt)
 
   return (
     <div
@@ -64,10 +65,7 @@ export function Todo({
         >
           {title}
         </h3>
-        <p>{description}</p>
-        <div className={`text-xs`}>
-          create on {date} at {time}
-        </div>
+        <div className={`text-xs`}>{dateTimeString}</div>
       </div>
       <div
         className={`

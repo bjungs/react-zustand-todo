@@ -44,14 +44,12 @@ function TodoFormField({ label, type, value, onChange }: TodoFormFieldProps) {
 
 export function TodoForm({ onNewTodo }: TodoFormProps) {
   const [title, setTitle] = useState<string>('')
-  const [description, setDescription] = useState<string>('')
 
   function addTodo(e: SyntheticEvent) {
     e.preventDefault()
-    if (title && description) {
-      onNewTodo(createTodo(title, description))
+    if (title) {
+      onNewTodo(createTodo(title))
       setTitle('')
-      setDescription('')
     }
   }
 
@@ -65,12 +63,6 @@ export function TodoForm({ onNewTodo }: TodoFormProps) {
           value={title}
           onChange={setTitle}
         />
-        <TodoFormField
-          type='text'
-          label='Description'
-          value={description}
-          onChange={setDescription}
-        />
       </fieldset>
       <button
         className={`
@@ -82,7 +74,7 @@ export function TodoForm({ onNewTodo }: TodoFormProps) {
           px-5 py-2.5
           self-end
         `}
-        disabled={!title || !description}
+        disabled={!title}
         type='submit'
       >
         Add TODO
