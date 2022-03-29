@@ -1,31 +1,9 @@
-import { useState } from 'react'
-import { createTodo, Todo } from './Todo'
+import Todo from './Todo'
 import { TodoForm } from './TodoForm'
+import useTodoStore from '../../stores/todoStore'
 
 export function Todos() {
-  const [todos, setTodos] = useState<Todo[]>([])
-
-  const updateTodoStatus = (idx: number) => (completed: boolean) => {
-    // todo: use zustand to handle the state
-    setTodos((currentTodos) => {
-      const updatedTodos = [...currentTodos]
-      updatedTodos[idx].completed = completed
-      return updatedTodos
-    })
-  }
-
-  const removeTodo = (idx: number) => () => {
-    console.log('idx to remove', idx)
-    setTodos((currentTodos) => {
-      const updatedTodos = [...currentTodos]
-      updatedTodos.splice(idx, 1)
-      return updatedTodos
-    })
-  }
-
-  function addTodo(todo: Todo) {
-    setTodos((currentTodos) => [...currentTodos, todo])
-  }
+  const { todos, addTodo, removeTodo, setTodoStatus } = useTodoStore()
 
   return (
     <div className={`w-72 md:w-96`}>
@@ -37,8 +15,8 @@ export function Todos() {
           <Todo
             key={idx}
             {...todo}
-            onStatusChange={updateTodoStatus(idx)}
-            onRemoveClick={removeTodo(idx)}
+            onStatusChange={(completed) => setTodoStatus(idx, completed)}
+            onRemoveClick={() => removeTodo(idx)}
           />
         ))}
       </div>
