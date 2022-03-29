@@ -1,7 +1,7 @@
 {
-  "name": "react-zunstand",
+  "name": "react-zustand-todo",
   "version": "1.1.0",
-  "description": "Boilerplate code for React application with TypeScript and TailwindCSS. Uses Prettier to enforce code style.",
+  "description": "Simple TODO app using React + Zustand",
   "repository": "https://github.com/narduw/react-ts-tw.git",
   "author": "Bernardo Nunes",
   "license": "MIT",

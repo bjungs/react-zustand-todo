@@ -1,6 +1,3 @@
-# React, TypeScript, and TailwindCSS Project template
+## A simple TODO app using React, Zustand and React-Spring
 
-This is a template project containing the boilerplate code for starting a new
-React application using TypeScript, TailwindCSS and StandardJS code style.
-
-Clone the project to get started.
+Bootstrapped using [react-ts-tw](https://github.com/narduw/react-ts-tw).
