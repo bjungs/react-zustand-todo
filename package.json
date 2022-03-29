@@ -1,6 +1,6 @@
 {
   "name": "react-zunstand",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Boilerplate code for React application with TypeScript and TailwindCSS. Uses Prettier to enforce code style.",
   "repository": "https://github.com/narduw/react-ts-tw.git",
   "author": "Bernardo Nunes",
